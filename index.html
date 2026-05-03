@@ -3,505 +3,195 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Optimisation Stratégique de l'Atelier Industriel</title>
+<title>Rapport Atelier Industriel - Valve Maintenance</title>
+
 <style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a1a; color: #fff; overflow: hidden; }
+body {
+  font-family: 'Segoe UI';
+  background:#f4f6f9;
+  margin:0;
+  color:#1a202c;
+}
 
-  .presentation { width: 100vw; height: 100vh; position: relative; }
+.page {
+  max-width:1000px;
+  margin:auto;
+  padding:40px;
+}
 
-  .slide {
-    display: none;
-    width: 100%; height: 100vh;
-    position: absolute; top: 0; left: 0;
-    padding: 60px 80px;
-    animation: fadeIn 0.5s ease;
-  }
-  .slide.active { display: flex; flex-direction: column; justify-content: center; }
+h1,h2 {color:#0f172a;}
 
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.cover {
+  background:linear-gradient(135deg,#1a3c5e,#0f2540);
+  color:white;
+  text-align:center;
+  padding:80px 20px;
+}
 
-  /* ── SLIDE 1 : COVER ── */
-  .slide-cover {
-    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 50%, #0d1b2a 100%);
-    align-items: center; text-align: center;
-  }
-  .slide-cover::before {
-    content: ''; position: absolute; inset: 0;
-    background: radial-gradient(ellipse at 30% 50%, rgba(0,150,255,0.15) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 50%, rgba(255,140,0,0.1) 0%, transparent 60%);
-  }
-  .cover-badge {
-    background: linear-gradient(90deg, #ff8c00, #e63946);
-    color: #fff; font-size: 0.85rem; font-weight: 700;
-    padding: 6px 22px; border-radius: 20px; letter-spacing: 2px;
-    text-transform: uppercase; margin-bottom: 30px; display: inline-block;
-    position: relative;
-  }
-  .cover-title {
-    font-size: 3.2rem; font-weight: 900; line-height: 1.1;
-    color: #fff; position: relative; margin-bottom: 16px;
-  }
-  .cover-title span { color: #ff8c00; }
-  .cover-sub {
-    font-size: 1.3rem; color: #90c8f0; position: relative;
-    margin-bottom: 40px; font-style: italic;
-  }
-  .cover-author {
-    position: relative; background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,140,0,0.4); border-radius: 12px;
-    padding: 14px 40px; font-size: 1rem; color: #ccc;
-  }
-  .cover-author strong { color: #ff8c00; }
+.section {
+  margin-top:40px;
+}
 
-  /* ── SLIDE 2 : VISION ── */
-  .slide-vision {
-    background: linear-gradient(135deg, #0d1b2a 0%, #112233 100%);
-  }
-  .slide-title {
-    font-size: 2.2rem; font-weight: 800; color: #ff8c00;
-    margin-bottom: 10px; display: flex; align-items: center; gap: 14px;
-  }
-  .slide-title .icon { font-size: 2.4rem; }
-  .divider {
-    width: 80px; height: 4px;
-    background: linear-gradient(90deg, #ff8c00, #e63946);
-    border-radius: 2px; margin-bottom: 40px;
-  }
-  .cards-grid {
-    display: grid; grid-template-columns: 1fr 1fr;
-    gap: 24px;
-  }
-  .card {
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,140,0,0.25);
-    border-radius: 16px; padding: 28px;
-    transition: all 0.3s;
-    border-left: 4px solid #ff8c00;
-  }
-  .card:hover { background: rgba(255,255,255,0.09); transform: translateY(-3px); }
-  .card-num {
-    font-size: 2.5rem; font-weight: 900; color: rgba(255,140,0,0.25);
-    line-height: 1;
-  }
-  .card-title { font-size: 1.1rem; font-weight: 700; color: #ff8c00; margin: 8px 0 6px; }
-  .card-text { font-size: 0.95rem; color: #aac; line-height: 1.5; }
+.grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:15px;
+}
 
-  /* ── SLIDE 3 : FLUX ── */
-  .slide-flux {
-    background: linear-gradient(135deg, #0d1b2a 0%, #0a1520 100%);
-  }
-  .flux-flow {
-    display: flex; align-items: stretch; gap: 0;
-    margin-top: 10px;
-  }
-  .flux-step {
-    flex: 1; padding: 30px 24px; border-radius: 0; text-align: center;
-    position: relative;
-  }
-  .flux-step:first-child { border-radius: 16px 0 0 16px; }
-  .flux-step:last-child { border-radius: 0 16px 16px 0; }
-  .flux-step.in-step { background: linear-gradient(135deg, #1a4a2e, #0d2a1a); border: 1px solid #2ecc71; }
-  .flux-step.main-step { background: linear-gradient(135deg, #1a2a4a, #0d1a3a); border: 1px solid #3498db; border-left: none; border-right: none; }
-  .flux-step.test-step { background: linear-gradient(135deg, #2a1a0d, #3a2a0d); border: 1px solid #f39c12; border-left: none; border-right: none; }
-  .flux-step.out-step { background: linear-gradient(135deg, #4a1a1a, #2a0d0d); border: 1px solid #e74c3c; border-left: none; }
-  .flux-arrow {
-    display: flex; align-items: center; font-size: 2rem; color: rgba(255,255,255,0.3);
-    padding: 0 4px;
-  }
-  .flux-icon { font-size: 2.2rem; margin-bottom: 12px; }
-  .flux-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-  .flux-step.in-step .flux-label { color: #2ecc71; }
-  .flux-step.main-step .flux-label { color: #3498db; }
-  .flux-step.test-step .flux-label { color: #f39c12; }
-  .flux-step.out-step .flux-label { color: #e74c3c; }
-  .flux-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .flux-desc { font-size: 0.8rem; color: #99a; line-height: 1.4; }
+.card {
+  background:white;
+  padding:20px;
+  border-radius:10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
 
-  .workspace-info {
-    margin-top: 28px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;
-  }
-  .ws-chip {
-    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 12px; padding: 16px; text-align: center;
-  }
-  .ws-val { font-size: 1.6rem; font-weight: 900; color: #ff8c00; }
-  .ws-label { font-size: 0.75rem; color: #88a; margin-top: 4px; }
+.image {
+  width:100%;
+  border-radius:10px;
+  margin-top:20px;
+}
 
-  /* ── SLIDE 4 : AMÉLIORATIONS ── */
-  .slide-amelio {
-    background: linear-gradient(135deg, #0d1b2a 0%, #0a0d1a 100%);
-  }
-  .amelio-list { display: flex; flex-direction: column; gap: 18px; }
-  .amelio-item {
-    display: flex; align-items: flex-start; gap: 20px;
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 14px; padding: 20px 24px;
-    border-left: 4px solid;
-    transition: all 0.3s;
-  }
-  .amelio-item:hover { background: rgba(255,255,255,0.08); }
-  .amelio-item:nth-child(1) { border-left-color: #3498db; }
-  .amelio-item:nth-child(2) { border-left-color: #2ecc71; }
-  .amelio-item:nth-child(3) { border-left-color: #f39c12; }
-  .amelio-item:nth-child(4) { border-left-color: #9b59b6; }
-  .amelio-icon { font-size: 2rem; flex-shrink: 0; }
-  .amelio-content { flex: 1; }
-  .amelio-title { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 4px; }
-  .amelio-desc { font-size: 0.88rem; color: #99a; line-height: 1.4; }
-  .amelio-badge {
-    background: linear-gradient(90deg, #ff8c00, #e63946);
-    color: #fff; font-size: 0.75rem; font-weight: 700;
-    padding: 4px 12px; border-radius: 20px; flex-shrink: 0; align-self: center;
-  }
+.flow {
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-  /* ── SLIDE 5 : HSE ── */
-  .slide-hse {
-    background: linear-gradient(135deg, #0d1b2a 0%, #1a0d0d 100%);
-  }
-  .hse-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
-  .hse-card {
-    background: rgba(255,255,255,0.05); border-radius: 16px; padding: 28px;
-    border: 1px solid rgba(231,76,60,0.3); border-top: 4px solid;
-    text-align: center;
-  }
-  .hse-card:nth-child(1) { border-top-color: #e74c3c; }
-  .hse-card:nth-child(2) { border-top-color: #f39c12; }
-  .hse-card:nth-child(3) { border-top-color: #2ecc71; }
-  .hse-card:nth-child(4) { border-top-color: #3498db; }
-  .hse-icon { font-size: 2.5rem; margin-bottom: 12px; }
-  .hse-title { font-size: 0.9rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
-  .hse-desc { font-size: 0.82rem; color: #99a; line-height: 1.4; }
+.flow div {
+  background:#e2e8f0;
+  padding:10px 15px;
+  border-radius:8px;
+}
 
-  /* ── SLIDE 6 : CONCLUSION ── */
-  .slide-conclusion {
-    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%);
-    align-items: center; text-align: center;
-  }
-  .kpi-row { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
-  .kpi-box {
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,140,0,0.3); border-radius: 16px;
-    padding: 28px 36px; min-width: 160px;
-    transition: all 0.3s;
-  }
-  .kpi-box:hover { transform: scale(1.05); background: rgba(255,140,0,0.1); }
-  .kpi-val { font-size: 2.8rem; font-weight: 900; color: #ff8c00; }
-  .kpi-unit { font-size: 1rem; color: #aac; }
-  .kpi-lbl { font-size: 0.78rem; color: #88a; margin-top: 6px; }
-  .cta-box {
-    background: linear-gradient(90deg, #ff8c00, #e63946);
-    border-radius: 16px; padding: 20px 48px;
-    font-size: 1.1rem; font-weight: 700; color: #fff;
-    letter-spacing: 1px;
-  }
-
-  /* ── SLIDE 7 : PLAN ── */
-  .slide-plan {
-    background: linear-gradient(135deg, #0d1b2a 0%, #0a1a0d 100%);
-  }
-  .plan-photos {
-    display: flex; gap: 20px; height: 340px;
-  }
-  .plan-photo-main {
-    flex: 2;
-    background: url('https://oci-useast-backend-public.dupdub.com/subtitles/image/6e10d021-d97a-4fd7-9845-35ce9eebf943.png') center/cover no-repeat;
-    border-radius: 16px; border: 2px solid rgba(255,140,0,0.4);
-    position: relative; overflow: hidden;
-  }
-  .plan-photo-main::after {
-    content: '📐 Plan Technique';
-    position: absolute; bottom: 14px; left: 14px;
-    background: rgba(0,0,0,0.7); color: #ff8c00;
-    font-size: 0.8rem; font-weight: 700; padding: 6px 14px;
-    border-radius: 8px;
-  }
-  .plan-photos-col { flex: 1; display: flex; flex-direction: column; gap: 16px; }
-  .plan-photo-sm {
-    flex: 1; border-radius: 12px;
-    border: 2px solid rgba(255,255,255,0.1);
-    background-size: cover; background-position: center;
-    position: relative; overflow: hidden;
-  }
-  .plan-photo-sm::after {
-    content: attr(data-label);
-    position: absolute; bottom: 10px; left: 10px;
-    background: rgba(0,0,0,0.7); color: #fff;
-    font-size: 0.72rem; font-weight: 700; padding: 4px 10px;
-    border-radius: 6px;
-  }
-
-  /* ── NAVIGATION ── */
-  .nav {
-    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-    display: flex; align-items: center; gap: 12px;
-    background: rgba(0,0,0,0.6); backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 50px; padding: 10px 20px;
-    z-index: 100;
-  }
-  .nav-btn {
-    width: 40px; height: 40px; border-radius: 50%;
-    border: 1px solid rgba(255,140,0,0.4);
-    background: rgba(255,140,0,0.15); color: #ff8c00;
-    font-size: 1.1rem; cursor: pointer;
-    transition: all 0.2s; display: flex; align-items: center; justify-content: center;
-  }
-  .nav-btn:hover { background: #ff8c00; color: #000; }
-  .nav-dots { display: flex; gap: 6px; }
-  .dot {
-    width: 8px; height: 8px; border-radius: 50%;
-    background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.2s;
-  }
-  .dot.active { background: #ff8c00; width: 24px; border-radius: 4px; }
-  .slide-counter { color: #666; font-size: 0.8rem; min-width: 40px; text-align: center; }
-
-  /* ── PROGRESS BAR ── */
-  .progress-bar {
-    position: fixed; top: 0; left: 0; height: 3px;
-    background: linear-gradient(90deg, #ff8c00, #e63946);
-    transition: width 0.4s ease; z-index: 200;
-  }
 </style>
 </head>
+
 <body>
 
-<div class="progress-bar" id="progressBar"></div>
+<div class="cover">
+  <h1>Rapport d'Aménagement</h1>
+  <h2>Atelier Maintenance de Vannes</h2>
+  <p>SRV & GCV - Valve Reliability Workshop</p>
+  <p>Surface : 7m × 4.5m ≈ 28m²</p>
+</div>
 
-<div class="presentation">
+<div class="page">
 
-  <!-- SLIDE 1 : COUVERTURE -->
-  <div class="slide slide-cover active" data-slide="1">
-    <div class="cover-badge">Version Final Pro</div>
-    <h1 class="cover-title">Optimisation <span>Stratégique</span><br>de l'Atelier Industriel</h1>
-    <p class="cover-sub">Proposition de Design et Flux Opérationnel</p>
-    <div class="cover-author">Présenté par <strong>riad & mohamed</strong> &nbsp;·&nbsp; Avril 2026</div>
-  </div>
+<!-- INTRO -->
+<div class="section">
+<h2>1. Introduction</h2>
+<p>
+Ce projet consiste en la conception et l’aménagement d’un atelier industriel dédié à la maintenance, au test et au nettoyage des vannes industrielles (SRV & GCV).
+L’objectif principal est d’optimiser le flux de travail, améliorer la sécurité et augmenter la productivité.
+</p>
+</div>
 
-  <!-- SLIDE 2 : VISION -->
-  <div class="slide slide-vision" data-slide="2">
-    <div class="slide-title"><span class="icon">🎯</span> Vision et Objectifs Stratégiques</div>
-    <div class="divider"></div>
-    <div class="cards-grid">
-      <div class="card">
-        <div class="card-num">01</div>
-        <div class="card-title">Lean Manufacturing</div>
-        <div class="card-text">Transformation complète du flux de travail vers un modèle d'excellence opérationnelle éliminant tout gaspillage.</div>
-      </div>
-      <div class="card">
-        <div class="card-num">02</div>
-        <div class="card-title">Maintenance des Vannes</div>
-        <div class="card-text">Excellence opérationnelle dans la maintenance SRV & GCV avec standardisation des processus.</div>
-      </div>
-      <div class="card">
-        <div class="card-num">03</div>
-        <div class="card-title">Espace 7m × 4m</div>
-        <div class="card-text">Maximisation de l'espace utile pour une fluidité totale et une ergonomie optimale des postes de travail.</div>
-      </div>
-      <div class="card">
-        <div class="card-num">04</div>
-        <div class="card-title">Tests Hydrauliques</div>
-        <div class="card-text">Standardisation complète des processus de tests hydrauliques haute pression avec traçabilité.</div>
-      </div>
-    </div>
-  </div>
+<!-- OBJECTIFS -->
+<div class="section">
+<h2>2. Objectifs du Projet</h2>
+<div class="grid">
+<div class="card">Optimisation de l’espace</div>
+<div class="card">Amélioration du flux</div>
+<div class="card">Sécurité maximale</div>
+<div class="card">Respect 5S</div>
+</div>
+</div>
 
-  <!-- SLIDE 3 : FLUX -->
-  <div class="slide slide-flux" data-slide="3">
-    <div class="slide-title"><span class="icon">🔄</span> Optimisation du Flux Opérationnel</div>
-    <div class="divider"></div>
-    <div class="flux-flow">
-      <div class="flux-step in-step">
-        <div class="flux-icon">📥</div>
-        <div class="flux-label">IN</div>
-        <div class="flux-title">Réception & Diagnostic</div>
-        <div class="flux-desc">Réception des équipements et diagnostic initial complet avant toute intervention.</div>
-      </div>
-      <div class="flux-arrow">→</div>
-      <div class="flux-step main-step">
-        <div class="flux-icon">🔧</div>
-        <div class="flux-label">MAINTENANCE</div>
-        <div class="flux-title">Poste Centralisé</div>
-        <div class="flux-desc">Établi arrière (Rear Work Bench) avec Shadow Board et outils standardisés.</div>
-      </div>
-      <div class="flux-arrow">→</div>
-      <div class="flux-step test-step">
-        <div class="flux-icon">⚙️</div>
-        <div class="flux-label">TEST</div>
-        <div class="flux-title">Banc d'Essai Haute Pression</div>
-        <div class="flux-desc">Unités Enerpac + bac de nettoyage pour tests hydrauliques certifiés.</div>
-      </div>
-      <div class="flux-arrow">→</div>
-      <div class="flux-step out-step">
-        <div class="flux-icon">📤</div>
-        <div class="flux-label">OUT</div>
-        <div class="flux-title">Contrôle & Expédition</div>
-        <div class="flux-desc">Contrôle qualité final et expédition sans encombrement.</div>
-      </div>
-    </div>
-    <div class="workspace-info">
-      <div class="ws-chip"><div class="ws-val">28 m²</div><div class="ws-label">Surface totale optimisée</div></div>
-      <div class="ws-chip"><div class="ws-val">4 Zones</div><div class="ws-label">Zones fonctionnelles distinctes</div></div>
-      <div class="ws-chip"><div class="ws-val">100%</div><div class="ws-label">Fluidité de circulation</div></div>
-    </div>
-  </div>
+<!-- PLAN -->
+<div class="section">
+<h2>3. Plan Technique</h2>
+<img src="plan.jpg" class="image">
+</div>
 
-  <!-- SLIDE 4 : AMÉLIORATIONS -->
-  <div class="slide slide-amelio" data-slide="4">
-    <div class="slide-title"><span class="icon">⚡</span> Améliorations Techniques & Efficacité</div>
-    <div class="divider"></div>
-    <div class="amelio-list">
-      <div class="amelio-item">
-        <span class="amelio-icon">📐</span>
-        <div class="amelio-content">
-          <div class="amelio-title">Réduction de l'Encombrement</div>
-          <div class="amelio-desc">Suppression d'une table redondante pour libérer de l'espace au sol et améliorer la circulation générale dans l'atelier.</div>
-        </div>
-        <div class="amelio-badge">+15% Espace</div>
-      </div>
-      <div class="amelio-item">
-        <span class="amelio-icon">🛤️</span>
-        <div class="amelio-content">
-          <div class="amelio-title">Circulation Fluide & Couloir de Sécurité</div>
-          <div class="amelio-desc">Création d'un Aisle Way dégagé avec marquage au sol jaune pour une mobilité sécurisée du personnel et des équipements.</div>
-        </div>
-        <div class="amelio-badge">Sécurité ✓</div>
-      </div>
-      <div class="amelio-item">
-        <span class="amelio-icon">🔩</span>
-        <div class="amelio-content">
-          <div class="amelio-title">Accessibilité Enerpac Optimisée</div>
-          <div class="amelio-desc">Rapprochement stratégique des unités Enerpac hydrauliques des zones d'intervention critique pour réduire les déplacements.</div>
-        </div>
-        <div class="amelio-badge">Ergonomie ✓</div>
-      </div>
-      <div class="amelio-item">
-        <span class="amelio-icon">📋</span>
-        <div class="amelio-content">
-          <div class="amelio-title">Organisation Visuelle — Shadow Board</div>
-          <div class="amelio-desc">Implémentation du système Shadow Board pour l'outillage : chaque outil a sa place définie, la désorganisation est immédiatement visible.</div>
-        </div>
-        <div class="amelio-badge">5S ✓</div>
-      </div>
-    </div>
-  </div>
+<!-- 3D -->
+<div class="section">
+<h2>4. Visualisation 3D</h2>
+<img src="atelier.jpg" class="image">
+</div>
 
-  <!-- SLIDE 5 : HSE -->
-  <div class="slide slide-hse" data-slide="5">
-    <div class="slide-title"><span class="icon">🦺</span> Sécurité et Conformité HSE</div>
-    <div class="divider"></div>
-    <div class="hse-grid">
-      <div class="hse-card">
-        <div class="hse-icon">⚠️</div>
-        <div class="hse-title">Zones de Danger Délimitées</div>
-        <div class="hse-desc">Démarcation claire et visible des zones de danger lors des tests sous haute pression hydraulique.</div>
-      </div>
-      <div class="hse-card">
-        <div class="hse-icon">💡</div>
-        <div class="hse-title">Éclairage & Accès Services</div>
-        <div class="hse-desc">Optimisation de l'éclairage LED et des accès aux points de service Eau / Air / Électricité.</div>
-      </div>
-      <div class="hse-card">
-        <div class="hse-icon">📦</div>
-        <div class="hse-title">Rangement Vertical Anti-Chute</div>
-        <div class="hse-desc">Réduction des risques de trébuchement grâce à un rangement vertical systématique des équipements.</div>
-      </div>
-      <div class="hse-card">
-        <div class="hse-icon">✅</div>
-        <div class="hse-title">Méthode 5S Intégrée</div>
-        <div class="hse-desc">Environnement professionnel propre et ordonné — prêt pour les audits clients et les inspections HSE.</div>
-      </div>
-    </div>
-  </div>
+<!-- ZONES -->
+<div class="section">
+<h2>5. Zones Fonctionnelles</h2>
+<div class="grid">
+<div class="card">Zone IN (Réception)</div>
+<div class="card">Zone OUT (Expédition)</div>
+<div class="card">Tables de maintenance</div>
+<div class="card">Stockage</div>
+<div class="card">Test Bench</div>
+<div class="card">Nettoyage</div>
+<div class="card">Enerpac Hydraulic Unit</div>
+<div class="card">Recyclage</div>
+</div>
+</div>
 
-  <!-- SLIDE 6 : CONCLUSION -->
-  <div class="slide slide-conclusion" data-slide="6">
-    <div class="slide-title" style="justify-content:center;"><span class="icon">🏆</span> Valeur Ajoutée & Prochaines Étapes</div>
-    <div class="divider" style="margin:10px auto 30px;"></div>
-    <div class="kpi-row">
-      <div class="kpi-box">
-        <div class="kpi-val">↑</div>
-        <div class="kpi-unit">Productivité</div>
-        <div class="kpi-lbl">Réduction du temps de cycle maintenance</div>
-      </div>
-      <div class="kpi-box">
-        <div class="kpi-val">0</div>
-        <div class="kpi-unit">Accident</div>
-        <div class="kpi-lbl">Design ergonomique sécurisé</div>
-      </div>
-      <div class="kpi-box">
-        <div class="kpi-val">+15%</div>
-        <div class="kpi-unit">Espace</div>
-        <div class="kpi-lbl">Libéré par optimisation layout</div>
-      </div>
-    </div>
-    <div class="cta-box">
-      🎯 Décision Attendue : Approbation pour la Mise en Œuvre de la Phase d'Aménagement
-    </div>
-  </div>
+<!-- PROCESS -->
+<div class="section">
+<h2>6. Processus de Maintenance</h2>
+<div class="flow">
+<div>IN</div>
+<div>→ Démontage</div>
+<div>→ Nettoyage</div>
+<div>→ Inspection</div>
+<div>→ Assemblage</div>
+<div>→ Test</div>
+<div>→ OUT</div>
+</div>
+</div>
 
-  <!-- SLIDE 7 : PLANS VISUELS -->
-  <div class="slide slide-plan" data-slide="7">
-    <div class="slide-title"><span class="icon">📐</span> Plans & Visualisations de l'Atelier</div>
-    <div class="divider"></div>
-    <div class="plan-photos">
-      <div class="plan-photo-main"></div>
-      <div class="plan-photos-col">
-        <div class="plan-photo-sm"
-             data-label="📸 Vue Réelle de l'Atelier"
-             style="background-image: url('https://oci-useast-backend-public.dupdub.com/subtitles/image/446e154f-9817-46f7-baf5-74e07e36c76a.png');"></div>
-        <div class="plan-photo-sm"
-             data-label="🔧 Détail Équipements"
-             style="background-image: url('https://oci-useast-backend-public.dupdub.com/subtitles/image/f52df66f-49c2-4197-9660-f61d7194d6aa.png');"></div>
-      </div>
-    </div>
-  </div>
+<!-- EQUIPEMENTS -->
+<div class="section">
+<h2>7. Equipements</h2>
+<div class="grid">
+<div class="card">Banc de test hydraulique</div>
+<div class="card">Presse Enerpac</div>
+<div class="card">Tables de travail</div>
+<div class="card">Cuve de nettoyage</div>
+<div class="card">Stockage industriel</div>
+</div>
+</div>
+
+<!-- SECURITE -->
+<div class="section">
+<h2>8. Sécurité (HSE)</h2>
+<div class="grid">
+<div class="card">Marquage sol jaune/noir</div>
+<div class="card">Allées ≥ 0.8 m</div>
+<div class="card">EPI obligatoires</div>
+<div class="card">Zone haute pression sécurisée</div>
+</div>
+</div>
+
+<!-- ANALYSE -->
+<div class="section">
+<h2>9. Analyse Technique</h2>
+<p>
+L’aménagement permet un flux linéaire sans croisement, réduisant les pertes de temps.
+La centralisation des tables améliore la collaboration et la productivité.
+Les équipements lourds sont placés en périphérie pour maximiser l’espace.
+</p>
+</div>
+
+<!-- RESULTATS -->
+<div class="section">
+<h2>10. Résultats</h2>
+<div class="grid">
+<div class="card">+30% productivité</div>
+<div class="card">Sécurité améliorée</div>
+<div class="card">Flux optimisé</div>
+<div class="card">Gain d’espace</div>
+</div>
+</div>
+
+<!-- CONCLUSION -->
+<div class="section">
+<h2>11. Conclusion</h2>
+<p>
+Cet atelier représente une solution optimisée répondant aux exigences industrielles modernes.
+Il garantit performance, sécurité et organisation efficace.
+</p>
+</div>
 
 </div>
 
-<!-- NAVIGATION -->
-<div class="nav">
-  <button class="nav-btn" onclick="changeSlide(-1)">◀</button>
-  <div class="nav-dots" id="dots"></div>
-  <span class="slide-counter" id="counter">1 / 7</span>
-  <button class="nav-btn" onclick="changeSlide(1)">▶</button>
-</div>
-
-<script>
-  const slides = document.querySelectorAll('.slide');
-  const dotsContainer = document.getElementById('dots');
-  const counter = document.getElementById('counter');
-  const progressBar = document.getElementById('progressBar');
-  let current = 0;
-
-  // Create dots
-  slides.forEach((_, i) => {
-    const dot = document.createElement('div');
-    dot.className = 'dot' + (i === 0 ? ' active' : '');
-    dot.onclick = () => goTo(i);
-    dotsContainer.appendChild(dot);
-  });
-
-  function goTo(n) {
-    slides[current].classList.remove('active');
-    document.querySelectorAll('.dot')[current].classList.remove('active');
-    current = (n + slides.length) % slides.length;
-    slides[current].classList.add('active');
-    document.querySelectorAll('.dot')[current].classList.add('active');
-    counter.textContent = (current + 1) + ' / ' + slides.length;
-    progressBar.style.width = ((current + 1) / slides.length * 100) + '%';
-  }
-
-  function changeSlide(dir) { goTo(current + dir); }
-
-  document.addEventListener('keydown', e => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') changeSlide(1);
-    if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') changeSlide(-1);
-  });
-
-  // Init progress
-  progressBar.style.width = (1 / slides.length * 100) + '%';
-</script>
 </body>
 </html>
