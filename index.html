@@ -1,197 +1,147 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rapport Atelier Industriel - Valve Maintenance</title>
-
-<style>
-body {
-  font-family: 'Segoe UI';
-  background:#f4f6f9;
-  margin:0;
-  color:#1a202c;
-}
-
-.page {
-  max-width:1000px;
-  margin:auto;
-  padding:40px;
-}
-
-h1,h2 {color:#0f172a;}
-
-.cover {
-  background:linear-gradient(135deg,#1a3c5e,#0f2540);
-  color:white;
-  text-align:center;
-  padding:80px 20px;
-}
-
-.section {
-  margin-top:40px;
-}
-
-.grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:15px;
-}
-
-.card {
-  background:white;
-  padding:20px;
-  border-radius:10px;
-  box-shadow:0 2px 8px rgba(0,0,0,0.05);
-}
-
-.image {
-  width:100%;
-  border-radius:10px;
-  margin-top:20px;
-}
-
-.flow {
-  display:flex;
-  gap:10px;
-  flex-wrap:wrap;
-}
-
-.flow div {
-  background:#e2e8f0;
-  padding:10px 15px;
-  border-radius:8px;
-}
-
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rapport Atelier Industriel - Valve Maintenance</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="buttons.css">
 </head>
 
 <body>
 
-<div class="cover">
-  <h1>Rapport d'Aménagement</h1>
-  <h2>Atelier Maintenance de Vannes</h2>
-  <p>SRV & GCV - Valve Reliability Workshop</p>
-  <p>Surface : 7m × 4.5m ≈ 28m²</p>
-</div>
+  <header class="cover">
+    <div class="cover-content">
+      <h1>Rapport d'Aménagement</h1>
+      <h2>Atelier Maintenance de Vannes</h2>
+      <p class="subtitle">SRV & GCV - Valve Reliability Workshop</p>
+      <span class="badge">Surface : 7m × 4.5m ≈ 28m²</span>
+    </div>
+  </header>
 
-<div class="page">
+  <main class="page">
 
-<!-- INTRO -->
-<div class="section">
-<h2>1. Introduction</h2>
-<p>
-Ce projet consiste en la conception et l’aménagement d’un atelier industriel dédié à la maintenance, au test et au nettoyage des vannes industrielles (SRV & GCV).
-L’objectif principal est d’optimiser le flux de travail, améliorer la sécurité et augmenter la productivité.
-</p>
-</div>
+    <section class="section">
+      <h2>1. Introduction</h2>
+      <p>
+        Ce projet consiste en la conception et l’aménagement d’un atelier industriel dédié à la maintenance, au test et au nettoyage des vannes industrielles (SRV & GCV).
+        L’objectif principal est d’optimiser le flux de travail, améliorer la sécurité et augmenter la productivité.
+      </p>
+    </section>
 
-<!-- OBJECTIFS -->
-<div class="section">
-<h2>2. Objectifs du Projet</h2>
-<div class="grid">
-<div class="card">Optimisation de l’espace</div>
-<div class="card">Amélioration du flux</div>
-<div class="card">Sécurité maximale</div>
-<div class="card">Respect 5S</div>
-</div>
-</div>
+    <section class="section">
+      <h2>2. Objectifs du Projet</h2>
+      <div class="grid">
+        <div class="card">
+          <strong>Optimisation</strong>
+          <span>de l’espace</span>
+        </div>
+        <div class="card">
+          <strong>Amélioration</strong>
+          <span>du flux</span>
+        </div>
+        <div class="card">
+          <strong>Sécurité</strong>
+          <span>maximale</span>
+        </div>
+        <div class="card">
+          <strong>Respect</strong>
+          <span>normes 5S</span>
+        </div>
+      </div>
+    </section>
 
-<!-- PLAN -->
-<div class="section">
-<h2>3. Plan Technique</h2>
-<img src="plan.jpg" class="image">
-</div>
+    <section class="section">
+      <h2>3. Plan Technique</h2>
+      <img src="plan.jpg" alt="Plan technique de l'atelier" class="image">
+    </section>
 
-<!-- 3D -->
-<div class="section">
-<h2>4. Visualisation 3D</h2>
-<img src="atelier.jpg" class="image">
-</div>
+    <section class="section">
+      <h2>4. Visualisation 3D</h2>
+      <img src="atelier.jpg" alt="Visualisation 3D de l'atelier" class="image">
+    </section>
 
-<!-- ZONES -->
-<div class="section">
-<h2>5. Zones Fonctionnelles</h2>
-<div class="grid">
-<div class="card">Zone IN (Réception)</div>
-<div class="card">Zone OUT (Expédition)</div>
-<div class="card">Tables de maintenance</div>
-<div class="card">Stockage</div>
-<div class="card">Test Bench</div>
-<div class="card">Nettoyage</div>
-<div class="card">Enerpac Hydraulic Unit</div>
-<div class="card">Recyclage</div>
-</div>
-</div>
+    <section class="section">
+      <h2>5. Zones Fonctionnelles</h2>
+      <div class="grid">
+        <div class="card">Zone IN (Réception)</div>
+        <div class="card">Zone OUT (Expédition)</div>
+        <div class="card">Tables de maintenance</div>
+        <div class="card">Stockage</div>
+        <div class="card">Test Bench</div>
+        <div class="card">Nettoyage</div>
+        <div class="card">Enerpac Hydraulic Unit</div>
+        <div class="card">Recyclage</div>
+      </div>
+    </section>
 
-<!-- PROCESS -->
-<div class="section">
-<h2>6. Processus de Maintenance</h2>
-<div class="flow">
-<div>IN</div>
-<div>→ Démontage</div>
-<div>→ Nettoyage</div>
-<div>→ Inspection</div>
-<div>→ Assemblage</div>
-<div>→ Test</div>
-<div>→ OUT</div>
-</div>
-</div>
+    <section class="section">
+      <h2>6. Processus de Maintenance</h2>
+      <div class="flow">
+        <div class="flow-step">IN</div>
+        <div class="flow-step">Démontage</div>
+        <div class="flow-step">Nettoyage</div>
+        <div class="flow-step">Inspection</div>
+        <div class="flow-step">Assemblage</div>
+        <div class="flow-step">Test</div>
+        <div class="flow-step">OUT</div>
+      </div>
+    </section>
 
-<!-- EQUIPEMENTS -->
-<div class="section">
-<h2>7. Equipements</h2>
-<div class="grid">
-<div class="card">Banc de test hydraulique</div>
-<div class="card">Presse Enerpac</div>
-<div class="card">Tables de travail</div>
-<div class="card">Cuve de nettoyage</div>
-<div class="card">Stockage industriel</div>
-</div>
-</div>
+    <section class="section">
+      <h2>7. Equipements</h2>
+      <div class="grid">
+        <div class="card">Banc de test hydraulique</div>
+        <div class="card">Presse Enerpac</div>
+        <div class="card">Tables de travail</div>
+        <div class="card">Cuve de nettoyage</div>
+        <div class="card">Stockage industriel</div>
+      </div>
+    </section>
 
-<!-- SECURITE -->
-<div class="section">
-<h2>8. Sécurité (HSE)</h2>
-<div class="grid">
-<div class="card">Marquage sol jaune/noir</div>
-<div class="card">Allées ≥ 0.8 m</div>
-<div class="card">EPI obligatoires</div>
-<div class="card">Zone haute pression sécurisée</div>
-</div>
-</div>
+    <section class="section">
+      <h2>8. Sécurité (HSE)</h2>
+      <div class="grid">
+        <div class="card">Marquage sol jaune/noir</div>
+        <div class="card">Allées ≥ 0.8 m</div>
+        <div class="card">EPI obligatoires</div>
+        <div class="card">Zone haute pression sécurisée</div>
+      </div>
+    </section>
 
-<!-- ANALYSE -->
-<div class="section">
-<h2>9. Analyse Technique</h2>
-<p>
-L’aménagement permet un flux linéaire sans croisement, réduisant les pertes de temps.
-La centralisation des tables améliore la collaboration et la productivité.
-Les équipements lourds sont placés en périphérie pour maximiser l’espace.
-</p>
-</div>
+    <section class="section">
+      <h2>9. Analyse Technique</h2>
+      <p>
+        L’aménagement permet un flux linéaire sans croisement, réduisant les pertes de temps.
+        La centralisation des tables améliore la collaboration et la productivité.
+        Les équipements lourds sont placés en périphérie pour maximiser l’espace.
+      </p>
+    </section>
 
-<!-- RESULTATS -->
-<div class="section">
-<h2>10. Résultats</h2>
-<div class="grid">
-<div class="card">+30% productivité</div>
-<div class="card">Sécurité améliorée</div>
-<div class="card">Flux optimisé</div>
-<div class="card">Gain d’espace</div>
-</div>
-</div>
+    <section class="section">
+      <h2>10. Résultats</h2>
+      <div class="grid">
+        <div class="card highlight-card"><strong>+30%</strong> Productivité</div>
+        <div class="card">Sécurité améliorée</div>
+        <div class="card">Flux optimisé</div>
+        <div class="card">Gain d’espace</div>
+      </div>
+    </section>
 
-<!-- CONCLUSION -->
-<div class="section">
-<h2>11. Conclusion</h2>
-<p>
-Cet atelier représente une solution optimisée répondant aux exigences industrielles modernes.
-Il garantit performance, sécurité et organisation efficace.
-</p>
-</div>
+    <section class="section">
+      <h2>11. Conclusion</h2>
+      <p>
+        Cet atelier représente une solution optimisée répondant aux exigences industrielles modernes.
+        Il garantit performance, sécurité et organisation efficace.
+      </p>
+    </section>
 
-</div>
+    <section class="section button-showcase">
+      <hr>
+      <br>
+      <div </section>
+
+  </main>
 
 </body>
 </html>

@@ -1,0 +1,156 @@
+/* ===============================
+   🎯 BUTTON DESIGN SYSTEM
+   =============================== */
+
+:root {
+  --btn-radius: 14px;
+  --transition: all 0.25s ease;
+
+  --color-primary: #6366f1;
+  --color-secondary: #ec4899;
+  --color-success: #10b981;
+  --color-danger: #ef4444;
+
+  --text-color: #ffffff;
+}
+
+/* ===============================
+   🔘 BASE BUTTON
+   =============================== */
+
+.btn {
+  position: relative;
+  padding: 14px 26px;
+  border: none;
+  border-radius: var(--btn-radius);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-color);
+  cursor: pointer;
+  overflow: hidden;
+  transition: var(--transition);
+  backdrop-filter: blur(10px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Glow layer */
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  opacity: 0;
+  transition: var(--transition);
+  z-index: -1;
+}
+
+/* ===============================
+   ✨ INTERACTIONS
+   =============================== */
+
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+}
+
+.btn:hover::before {
+  opacity: 1;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+/* Focus (accessibilité) */
+.btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+/* Disabled */
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ===============================
+   🎨 VARIANTS
+   =============================== */
+
+/* 🔵 PRIMARY */
+.btn-primary {
+  background: linear-gradient(135deg, #6366f1, #4f46e5);
+  box-shadow: 0 0 10px rgba(99,102,241,0.4);
+}
+
+.btn-primary::before {
+  box-shadow:
+    0 0 25px rgba(99,102,241,0.8),
+    0 0 60px rgba(79,70,229,0.6);
+}
+
+/* 🌸 GRADIENT PREMIUM */
+.btn-gradient {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+}
+
+.btn-gradient::before {
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  filter: blur(20px);
+}
+
+/* 🟢 SUCCESS */
+.btn-success {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.btn-success::before {
+  box-shadow: 0 0 30px rgba(16,185,129,0.8);
+}
+
+/* 🔴 DANGER */
+.btn-danger {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+.btn-danger::before {
+  box-shadow: 0 0 30px rgba(239,68,68,0.8);
+}
+
+/* ===============================
+   ⚡ NEON BUTTON
+   =============================== */
+
+.btn-neon {
+  background: #0f172a;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.btn-neon::before {
+  box-shadow: 0 0 40px rgba(99,102,241,0.8);
+}
+
+.btn-neon:hover {
+  animation: pulse 1.2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 10px #6366f1; }
+  50% { box-shadow: 0 0 30px #6366f1; }
+  100% { box-shadow: 0 0 10px #6366f1; }
+}
+
+/* ===============================
+   📱 RESPONSIVE
+   =============================== */
+
+@media (max-width: 600px) {
+  .btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+  }
+}
